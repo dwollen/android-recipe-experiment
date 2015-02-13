@@ -6,29 +6,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <!-- The action bar! -->
-        <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?android:attr/actionBarSize"
-            android:background="?android:attr/colorPrimary" />
+            android:background="?android:attr/actionBarItemBackground"
+            android:layout_alignParentTop="true"/>
         <!-- The main content view -->
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
-        <!-- The navigation drawer -->
-        <ListView android:id="@+id/left_drawer"
-            android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:choiceMode="singleChoice"
-            android:divider="#DDD"
-            android:dividerHeight="1dp"
-            android:background="#A06"/>
+            android:layout_below="@id/toolbar">
+        </FrameLayout>
     </RelativeLayout>
-
+    <!-- The navigation drawer -->
+    <ListView android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="#03A9F4"
+        android:dividerHeight="1dp"
+        android:background="#1A237E"/>
 </android.support.v4.widget.DrawerLayout>

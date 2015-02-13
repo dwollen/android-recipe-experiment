@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 public class RecipeList extends Activity implements RecipeFragment.OnFragmentInteractionListener {
 
@@ -51,9 +51,16 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-        setActionBar(mActionBar);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        setTitle(getResources().getString(R.string.app_name));
+//
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setHomeButtonEnabled(true);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        mActionBar.setTitle(title);
     }
 
     private void restoreState(Bundle saveInstanceState) {
