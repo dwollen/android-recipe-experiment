@@ -7,11 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
+        android:textSize="@dimen/abc_text_size_medium_material"
         android:textColor="@color/primary_text_default_material_light"
         android:id="@+id/drawer_item_text"
         android:minHeight="@dimen/abc_action_button_min_height_material"
         android:gravity="center_vertical"
-        android:padding="8dp"
-        android:translationZ="3dp" />
+        android:padding="8dp"/>
 
 </LinearLayout>

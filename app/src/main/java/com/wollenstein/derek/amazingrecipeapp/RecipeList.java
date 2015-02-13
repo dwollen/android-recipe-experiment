@@ -30,10 +30,6 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
-        if (saveInstanceState != null) {
-            restoreState(saveInstanceState);
-        }
-
         setContentView(R.layout.activity_recipe_list);
         mCoolRecipeNames = getResources().getStringArray(R.array.cool_recipe_names);
         mCoolRecipes = getResources().getStringArray(R.array.cool_recipes);
@@ -51,7 +47,12 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-        setTitle(getResources().getString(R.string.app_name));
+
+        if (saveInstanceState != null) {
+            restoreState(saveInstanceState);
+        } else {
+            setTitle(getResources().getString(R.string.app_name));
+        }
 //
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 //        getActionBar().setHomeButtonEnabled(true);

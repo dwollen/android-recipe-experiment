@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
         android:singleLine="false"
+        android:editable="true"
         android:id="@+id/recipeTextView"/>
 
 </FrameLayout>
