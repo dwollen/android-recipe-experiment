@@ -1,7 +1,5 @@
 package com.wollenstein.derek.amazingrecipeapp.recipes;
 
-import android.test.AndroidTestCase;
-
 import junit.framework.TestCase;
 
 /**
@@ -16,14 +14,14 @@ public class RecipeManagerTest extends TestCase {
 
     public void testNullRecipeNames_throws() {
         try{
-            new RecipeManager(null,new String[]{});
+            new RecipeManager(null,new String[]{}, null);
             fail("Should have thrown NullPointerException");
         } catch (NullPointerException expected) {}
     }
 
     public void testNullRecipes_throws() {
         try {
-            new RecipeManager(new String[]{}, null);
+            new RecipeManager(new String[]{}, null, null);
             fail("Should have thrown NullPointerException");
         } catch (NullPointerException expected) {}
     }
@@ -32,7 +30,7 @@ public class RecipeManagerTest extends TestCase {
         try {
             new RecipeManager(
                     new String[] {RECIPE_1_NAME},
-                    new String[] {RECIPE_1_CONTENT, RECIPE_2_CONTENT});
+                    new String[] {RECIPE_1_CONTENT, RECIPE_2_CONTENT}, null);
             fail("Should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException expected) {}
     }
@@ -102,6 +100,6 @@ public class RecipeManagerTest extends TestCase {
     private RecipeManager getTestManager() {
         return new RecipeManager(
                 new String[] {RECIPE_1_NAME, RECIPE_2_NAME},
-                new String[] {RECIPE_1_CONTENT, RECIPE_2_CONTENT});
+                new String[] {RECIPE_1_CONTENT, RECIPE_2_CONTENT}, null);
     }
 }

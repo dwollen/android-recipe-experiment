@@ -17,5 +17,6 @@
     </array>
 
     <string name="backup_header_string">Backup Recipe List</string>
-
+    <string name="footer_github_string">View this project on Github!</string>
+    <string name="github_url">https://github.com/dwollen/android-recipe-experiment</string>
 </resources>

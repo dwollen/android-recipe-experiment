@@ -1,7 +1,12 @@
 package com.wollenstein.derek.amazingrecipeapp.recipes;
 
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
+
+import java.util.List;
 
 /**
  * Facade for interacting with recipes.
@@ -10,10 +15,11 @@ import android.util.Log;
  */
 public class RecipeManager {
     public static final String RECIPE = "recipe";
+    private final RecipeDBHelper mDbHelper;
     public String[] mRecipeNames;
     public String[] mRecipes;
 
-    public RecipeManager(String[] recipeNames, String[] recipes) {
+    public RecipeManager(String[] recipeNames, String[] recipes, Context context) {
         if (recipeNames == null) {
             Log.e("recipe", "Recieved empty recipe names");
             throw new NullPointerException("Empty Recipe Names");
@@ -28,6 +34,8 @@ public class RecipeManager {
         }
         mRecipeNames = recipeNames;
         mRecipes = recipes;
+        mDbHelper = new RecipeDBHelper(context);
+        new ReloadRecipesTask(mDbHelper).execute();
     }
 
     public String getRecipeTitle(int n) {
@@ -57,5 +65,29 @@ public class RecipeManager {
 
     public int getRecipeCount() {
         return mRecipes.length;
+    }
+
+    private static final class ReloadRecipesTask extends AsyncTask<Void, Void, List<String>> {
+
+        private RecipeDBHelper mDbHelper;
+
+        public ReloadRecipesTask(RecipeDBHelper helper) {
+            mDbHelper = helper;
+        }
+
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            try (SQLiteDatabase database = mDbHelper.getWritableDatabase()) {
+                return mDbHelper.readRecipes(database);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<String> recipes) {
+            super.onPostExecute(recipes);
+            for (String recipe : recipes) {
+                Log.i("recipe", "Got a recipe: " + recipes);
+            }
+        }
     }
 }
