@@ -3,7 +3,6 @@
     android:theme="@style/Widget.AppCompat.ListPopupWindow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment"
     android:textSize="@dimen/abc_text_size_medium_material"
     android:textColor="@color/primary_text_default_material_light"
     android:id="@+id/drawer_item_text"

@@ -117,7 +117,8 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
     private class DrawerItemOnClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            // subtract one from the position to account for the header offset.
+            selectItem(position - 1);
         }
     }
 
@@ -132,6 +133,7 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
+        // Look one up in recipe names to account for the header row.
         setTitle(mCoolRecipeNames[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
