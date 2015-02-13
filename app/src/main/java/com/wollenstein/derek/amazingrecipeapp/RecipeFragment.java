@@ -3,10 +3,14 @@ package com.wollenstein.derek.amazingrecipeapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +67,22 @@ public class RecipeFragment extends Fragment {
         View inflated = inflater.inflate(R.layout.fragment_recipe, container, false);
         mEditText = (EditText) inflated;
         mEditText.setText(mRecipeName);
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Nothing to do, see onTextChanged
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mListener.onFragmentInteraction(mRecipeNumber, s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Nothing to do, see onTextChanged
+            }
+        });
         return inflated;
     }
 
@@ -83,18 +103,8 @@ public class RecipeFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(String coolRecipe);
+        public void onFragmentInteraction(int recipeNumber, String coolRecipe);
     }
 
 }

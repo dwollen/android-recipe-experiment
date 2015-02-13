@@ -17,10 +17,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.wollenstein.derek.amazingrecipeapp.recipes.RecipeManager;
+
 public class RecipeList extends Activity implements RecipeFragment.OnFragmentInteractionListener {
 
-    private String[] mCoolRecipeNames;
-    private String[] mCoolRecipes;
+    public static final String RECIPES_KEY = "recipes";
+    public static final String TITLE_KEY = "title";
+    private RecipeManager mRecipeManager;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
@@ -32,8 +35,9 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         super.onCreate(saveInstanceState);
 
         setContentView(R.layout.activity_recipe_list);
-        mCoolRecipeNames = getResources().getStringArray(R.array.cool_recipe_names);
-        mCoolRecipes = getResources().getStringArray(R.array.cool_recipes);
+        String[] recipeNames = getResources().getStringArray(R.array.cool_recipe_names);
+        mRecipeManager = new RecipeManager(
+                recipeNames, getResources().getStringArray(R.array.cool_recipes));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActionBar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,9 +46,9 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
                 this, mDrawerLayout, R.string.app_name, R.string.app_name);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-            mDrawerList.addHeaderView(mDrawerHeader, "You are the very best", false);
+        mDrawerList.addHeaderView(mDrawerHeader, "You are the very best", false);
         mDrawerList.setAdapter(new ArrayAdapter<String>(
-                this, R.layout.drawer_list_item, R.id.drawer_item_text, mCoolRecipeNames));
+                this, R.layout.drawer_list_item, R.id.drawer_item_text, recipeNames));
         mDrawerList.setOnItemClickListener(new DrawerItemOnClickListener());
 
         // Set the drawer toggle as the DrawerListener
@@ -69,12 +73,23 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         if (title != null) {
             setTitle(title);
         }
+        String[] recipes = saveInstanceState.getStringArray("recipes");
+        if (recipes != null) {
+            for (int i = 0; i < recipes.length; i++) {
+                mRecipeManager.updateRecipe(i, recipes[i]);
+            }
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putCharSequence("title", getTitle());
+        outState.putCharSequence(TITLE_KEY, getTitle());
+        String[] recipes = new String[mRecipeManager.getRecipeCount()];
+        for (int i = 0; i < mRecipeManager.getRecipeCount(); i++) {
+            recipes[i] = mRecipeManager.getRecipe(i);
+        }
+        outState.putStringArray(RECIPES_KEY, recipes);
     }
 
     @Override
@@ -110,20 +125,22 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
     }
 
     @Override
-    public void onFragmentInteraction(String coolRecipe) {
+    public void onFragmentInteraction(int recipeNumber, String coolRecipe) {
         Log.d("recipe", "Somebody gave me this sweet recipe: " + coolRecipe);
+        mRecipeManager.updateRecipe(recipeNumber, coolRecipe);
     }
 
     private class DrawerItemOnClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // subtract one from the position to account for the header offset.
-            selectItem(position - 1);
+            // Subtract from position to account for the header views entries.
+            selectItem(position - mDrawerList.getHeaderViewsCount());
         }
     }
 
     private void selectItem(int position) {
-        Fragment fragment = RecipeFragment.newRecipeFragment(position, mCoolRecipes[position]);
+        Fragment fragment = RecipeFragment.newRecipeFragment(
+                position, mRecipeManager.getRecipe(position));
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
@@ -134,7 +151,7 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
         // Look one up in recipe names to account for the header row.
-        setTitle(mCoolRecipeNames[position]);
+        setTitle(mRecipeManager.getRecipeTitle(position));
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 }

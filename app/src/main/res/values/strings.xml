@@ -16,6 +16,6 @@
         <item>Step 1: Buy some sort of gourd.\nStep 2: Light gourd on fire.\nStep 3: Add magnesium.</item>
     </array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="backup_header_string">Backup Recipe List</string>
 
 </resources>
