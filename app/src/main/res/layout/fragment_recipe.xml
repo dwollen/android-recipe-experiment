@@ -1,15 +1,9 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<EditText
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/TextAppearance.AppCompat.Display1"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wollenstein.derek.amazingrecipeapp.RecipeFragment">
-
-    <TextView
-        android:theme="@style/TextAppearance.AppCompat.Display1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:singleLine="false"
-        android:editable="true"
-        android:id="@+id/recipeTextView"/>
-
-</FrameLayout>
+    android:singleLine="false"
+    android:editable="true"
+    android:id="@+id/recipeTextView"/>

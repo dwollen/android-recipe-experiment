@@ -3,11 +3,10 @@ package com.wollenstein.derek.amazingrecipeapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +24,7 @@ public class RecipeFragment extends Fragment {
     private String mRecipeName;
 
     private OnFragmentInteractionListener mListener;
-    private TextView mTextView;
+    private EditText mEditText;
 
     /**
      * Use this factory method to create a new instance of
@@ -62,8 +61,8 @@ public class RecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View inflated = inflater.inflate(R.layout.fragment_recipe, container, false);
-        mTextView = (TextView) inflated.findViewById(R.id.recipeTextView);
-        mTextView.setText(mRecipeName);
+        mEditText = (EditText) inflated;
+        mEditText.setText(mRecipeName);
         return inflated;
     }
 

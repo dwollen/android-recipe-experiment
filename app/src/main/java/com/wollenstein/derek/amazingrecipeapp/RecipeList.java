@@ -25,6 +25,7 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
     private ListView mDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private Toolbar mActionBar;
+    private View mDrawerHeader;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -33,13 +34,15 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         setContentView(R.layout.activity_recipe_list);
         mCoolRecipeNames = getResources().getStringArray(R.array.cool_recipe_names);
         mCoolRecipes = getResources().getStringArray(R.array.cool_recipes);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActionBar = (Toolbar) findViewById(R.id.toolbar);
-
+        mDrawerHeader = getLayoutInflater().inflate(R.layout.drawer_list_header, null);
         mActionBarDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, R.string.app_name, R.string.app_name);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+            mDrawerList.addHeaderView(mDrawerHeader, "You are the very best", false);
         mDrawerList.setAdapter(new ArrayAdapter<String>(
                 this, R.layout.drawer_list_item, R.id.drawer_item_text, mCoolRecipeNames));
         mDrawerList.setOnItemClickListener(new DrawerItemOnClickListener());
@@ -47,15 +50,12 @@ public class RecipeList extends Activity implements RecipeFragment.OnFragmentInt
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-
         if (saveInstanceState != null) {
             restoreState(saveInstanceState);
         } else {
             setTitle(getResources().getString(R.string.app_name));
         }
-//
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setHomeButtonEnabled(true);
+
     }
 
     @Override
