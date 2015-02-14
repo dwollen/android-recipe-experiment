@@ -67,7 +67,7 @@ public class RecipeManager {
         return mRecipes.length;
     }
 
-    private static final class ReloadRecipesTask extends AsyncTask<Void, Void, List<String>> {
+    private static final class ReloadRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
 
         private RecipeDBHelper mDbHelper;
 
@@ -76,17 +76,17 @@ public class RecipeManager {
         }
 
         @Override
-        protected List<String> doInBackground(Void... params) {
+        protected List<Recipe> doInBackground(Void... params) {
             try (SQLiteDatabase database = mDbHelper.getWritableDatabase()) {
                 return mDbHelper.readRecipes(database);
             }
         }
 
         @Override
-        protected void onPostExecute(List<String> recipes) {
+        protected void onPostExecute(List<Recipe> recipes) {
             super.onPostExecute(recipes);
-            for (String recipe : recipes) {
-                Log.i("recipe", "Got a recipe: " + recipes);
+            for (Recipe recipe : recipes) {
+                Log.i("recipe", "Got a recipe: " + recipe.getName());
             }
         }
     }
