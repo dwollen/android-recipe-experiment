@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FoodView">
+        <attr name="foodType" format="enum">
+            <enum name="mystery" value="0"/>
+            <enum name="banana" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

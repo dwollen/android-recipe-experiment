@@ -14,14 +14,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?android:attr/actionBarSize"
-            android:background="@color/light_green"
+            android:background="@color/medium_indigo"
             android:elevation="4dp"/>
         <!-- The main content view -->
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foreground="?android:windowContentOverlay"/>
+            android:foreground="?android:windowContentOverlay">
+            <!-- FAB -->
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="@dimen/round_button_diameter"
+                android:layout_height="@dimen/round_button_diameter"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="@dimen/add_button_margin"
+                android:layout_marginEnd="@dimen/add_button_margin"
+                android:tint="@android:color/white"
+                android:background="@drawable/oval"
+                android:stateListAnimator="@anim/button_elevation"
+                android:src="@android:drawable/ic_input_add"/>
+        </FrameLayout>
     </LinearLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"
@@ -29,7 +42,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@color/light_green"
-        android:dividerHeight="1dp"
-        android:background="@color/light_orange"/>
+        android:divider="@color/medium_pink"
+        android:dividerHeight="1dp"/>
 </android.support.v4.widget.DrawerLayout>

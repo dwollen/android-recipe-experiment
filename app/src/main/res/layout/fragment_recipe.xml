@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<EditText
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wollenstein.derek.amazingrecipeapp.view.FoodView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    app:foodType="banana"
     android:theme="@style/Base.TextAppearance.AppCompat.Caption"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:singleLine="false"
-    android:editable="true"
     android:gravity="top"
-    android:id="@+id/recipeTextView"/>
+    android:id="@+id/recipeTextView" />

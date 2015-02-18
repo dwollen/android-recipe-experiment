@@ -3,21 +3,17 @@ package com.wollenstein.derek.amazingrecipeapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link RecipeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link RecipeFragment#newInstance} factory method to
+ * Use the {@link RecipeFragment#newRecipeFragment} factory method to
  * create an instance of this fragment.
  */
 public class RecipeFragment extends Fragment {
@@ -64,26 +60,9 @@ public class RecipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View inflated = inflater.inflate(R.layout.fragment_recipe, container, false);
-        mEditText = (EditText) inflated;
-        mEditText.setText(mRecipeName);
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Nothing to do, see onTextChanged
-            }
+        View recipeView = inflater.inflate(R.layout.fragment_recipe, container, false);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mListener.onFragmentInteraction(mRecipeNumber, s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Nothing to do, see onTextChanged
-            }
-        });
-        return inflated;
+        return recipeView;
     }
 
     @Override

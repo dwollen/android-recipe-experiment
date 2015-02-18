@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="dark_orange">#E65100</color>
-    <color name="light_orange">#FFB74D</color>
-    <color name="light_green">#03A9F4</color>
+    <color name="medium_indigo">#3F51B5</color>
+    <color name="dark_indigo">#1A237E</color>
+    <color name="medium_pink">#E91E63</color>
+    <color name="banana_yellow">#FFEB3B</color>
+    <color name="black">#000000</color>
 </resources>
